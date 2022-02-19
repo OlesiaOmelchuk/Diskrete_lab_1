@@ -1,0 +1,1 @@
+# Diskrete_lab_1
