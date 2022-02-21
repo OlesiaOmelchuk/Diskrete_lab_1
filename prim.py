@@ -3,7 +3,6 @@ import random
 from itertools import combinations, groupby
 import networkx as nx
 import matplotlib.pyplot as plt
-import time
 
 
 def gnp_random_connected_graph(num_of_nodes: int,
@@ -40,9 +39,10 @@ def gnp_random_connected_graph(num_of_nodes: int,
     return G, weight_list
 
 
-def prim(graph_info: tuple):
+def prim(graph_info: tuple) -> list[tuple]:
     """
     Get minimum spanning tree using Prim's algorithm.
+    Returns: list of nodes.
     """
     minimum_spanning_tree = []
 
@@ -79,15 +79,6 @@ def prim(graph_info: tuple):
 
 
 if __name__ == '__main__':
-    # random_graph = gnp_random_connected_graph(500, 0.6)
-    # minimum_tree = prim(random_graph)
-    # print(minimum_tree)
-
-    time_taken = 0
-    for i in range(10):
-        start = time.time()
-        prim(gnp_random_connected_graph(500, 1)[0])
-        end = time.time()
-        time_taken += (end-start)
-    print(time_taken)
-    print(time_taken/10)
+    random_graph = gnp_random_connected_graph(500, 0.6)
+    minimum_tree = prim(random_graph)
+    print(minimum_tree)
