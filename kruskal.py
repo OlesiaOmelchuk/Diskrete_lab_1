@@ -3,7 +3,6 @@ import random
 from itertools import combinations, groupby
 import networkx as nx
 import matplotlib.pyplot as plt
-import time
 
 
 def gnp_random_connected_graph(num_of_nodes: int,
@@ -40,7 +39,11 @@ def gnp_random_connected_graph(num_of_nodes: int,
     return G, weight_list
 
 
-def kruskal(graph_and_weight):
+def kruskal(graph_and_weight: tuple) -> list[tuple]:
+    """
+    Get minimum spanning tree using Kruskal's algorithm.
+    Returns: list of nodes.
+    """
     carcass_edges = []
 
     G = graph_and_weight[0]
@@ -69,20 +72,11 @@ def kruskal(graph_and_weight):
             nodes.append(sets_to_union[0].union(sets_to_union[1]))
             nodes.remove(sets_to_union[0])
             nodes.remove(sets_to_union[1])
-            
+
     return carcass_edges
 
 
 if __name__ == '__main__':
-    # random_graph = gnp_random_connected_graph(500, 0.6)
-    # minimum_tree = prim(random_graph)
-    # print(minimum_tree)
-
-    time_taken = 0
-    for i in range(10):
-        start = time.time()
-        kruskal(gnp_random_connected_graph(500, 1))
-        end = time.time()
-        time_taken += (end-start)
-    print(time_taken)
-    print(time_taken/10)
+    random_graph = gnp_random_connected_graph(500, 0.6)
+    minimum_tree = kruskal(random_graph)
+    print(minimum_tree)
